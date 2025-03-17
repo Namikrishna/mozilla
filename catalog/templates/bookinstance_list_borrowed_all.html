@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h2>All Borrowed Books</h2>
+  {% if bookinstance_list %}
+    <ul>
+      {% for bookinstance in bookinstance_list %}
+        <li>
+          <strong>{{ bookinstance.book.title }}</strong> - Borrowed by: 
+          {{ bookinstance.borrower.get_full_name|default:bookinstance.borrower.username }}
+          (Due back: {{ bookinstance.due_back }})
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No books are currently borrowed.</p>
+  {% endif %}
+{% endblock %}
